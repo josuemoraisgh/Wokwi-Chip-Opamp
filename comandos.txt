@@ -1,0 +1,5 @@
+git tag                  # Veja se a tag existe
+git tag -d v0.0.1        # Apaga a tag local (se for preciso)
+git push origin :refs/tags/v0.0.1  # Apaga a tag remota (se for preciso)
+git tag v0.0.1 # Cria a tag anotada
+git push origin v0.0.1   # Envia para o GitHub

@@ -18,8 +18,8 @@ static void opamp_simulate(void *user_data);
 
 void chip_init() {
   opamp_chip_t *chip = malloc(sizeof(opamp_chip_t));
-  chip->vinp = pin_init("IN+", ANALOG);
-  chip->vinn = pin_init("IN-", ANALOG);
+  chip->vinp = pin_init("INP", ANALOG);
+  chip->vinn = pin_init("INN", ANALOG);
   chip->vout = pin_init("OUT", OUTPUT);
   chip->vcc  = pin_init("VCC", ANALOG);
   chip->vee  = pin_init("VEE", ANALOG);

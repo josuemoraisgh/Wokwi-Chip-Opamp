@@ -17,6 +17,8 @@ jobs:
           sources: "src/main.c"
       - name: Copy chip.json
         run: sudo cp chip.json dist
+      - name: Copy chip.svg
+        run: sudo cp chip.svg dist
       - name: 'Upload Artifacts'
         uses: actions/upload-artifact@v4
         with:

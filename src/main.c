@@ -39,7 +39,7 @@ void chip_init() {
   chip->tid = timer_init(&tcfg);
   timer_start(chip->tid, chip->last_period, true);
 
-  printf("[chip-opamp] OpAmp custom pronto com controles via atributos!\n");
+  //printf("[chip-opamp] OpAmp custom pronto com controles via atributos!\n");
 }
 
 static void opamp_simulate(void *user_data) {
@@ -76,6 +76,5 @@ static void opamp_simulate(void *user_data) {
 
   pin_write(chip->vout, out);
 
-  printf("[chip-opamp] VINP=%.3fV VINN=%.3fV VOUT=%.3fV (Ganho=%.0fx, Periodo=%dms)\n",
-         vinp, vinn, out, gain, period);
+  //printf("[chip-opamp] VINP=%.3fV VINN=%.3fV VOUT=%.3fV (Ganho=%.0fx, Periodo=%dms)\n", vinp, vinn, out, gain, period);
 }

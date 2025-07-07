@@ -1,6 +1,6 @@
 <svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
   <!-- Triângulo do AmpOp (ponta para a direita) -->
-  <polygon points="20,40 100,10 100,70" fill="#fff" stroke="#111" stroke-width="2"/>
+  <polygon points="20,40 100,10 100,70" fill="#ffffff" stroke="#111" stroke-width="2"/>
   <!-- Símbolo "+" -->
   <text x="104" y="20" font-size="14" font-family="monospace" fill="#1a1a1a">+</text>
   <!-- Símbolo "-" -->
@@ -40,7 +40,7 @@
   </g>
   <!-- Pino IN- (direita inferior) -->
   <g id="pin-INN">
-    <circle cx="110" cy="54" r="3" fill="#050000FF"/>
+    <circle cx="110" cy="54" r="3" fill="#050000" fill-opacity="1"/>
     <rect x="110" y="51" width="10" height="6" fill="none"/>
   </g>
 </svg>

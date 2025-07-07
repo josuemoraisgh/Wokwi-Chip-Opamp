@@ -18,11 +18,11 @@ static void opamp_simulate(void *user_data);
 
 void chip_init() {
   opamp_chip_t *chip = malloc(sizeof(opamp_chip_t));
-  chip->vinp = pin_init("INP", ANALOG);
-  chip->vinn = pin_init("INN", ANALOG);
-  chip->vout = pin_init("OUT", OUTPUT);
   chip->vcc  = pin_init("VCC", ANALOG);
   chip->vee  = pin_init("VEE", ANALOG);
+  chip->vout = pin_init("OUT", OUTPUT);  
+  chip->vinp = pin_init("INP", ANALOG);
+  chip->vinn = pin_init("INN", ANALOG);
 
   // Liga aos "id" definidos em chip.json (controls)
   chip->gain_attr   = attr_init("gain",   100000);
@@ -76,5 +76,11 @@ static void opamp_simulate(void *user_data) {
 
   pin_write(chip->vout, out);
 
+<<<<<<< HEAD
   //printf("[chip-opamp] VINP=%.3fV VINN=%.3fV VOUT=%.3fV (Ganho=%.0fx, Periodo=%dms)\n", vinp, vinn, out, gain, period);
 }
+=======
+  printf("[chip-opamp] VINP=%.3fV VINN=%.3fV VOUT=%.3fV (Ganho=%.0fx, Periodo=%dms)\n",
+         vinp, vinn, out, gain, period);
+}
+>>>>>>> a229a647c5c60729d5e6c29f771158552b6988be

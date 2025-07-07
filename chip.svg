@@ -1,0 +1,46 @@
+<svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Triângulo do AmpOp (ponta para a direita) -->
+  <polygon points="20,40 100,10 100,70" fill="#fff" stroke="#111" stroke-width="2"/>
+  <!-- Símbolo "+" -->
+  <text x="104" y="20" font-size="14" font-family="monospace" fill="#1a1a1a">+</text>
+  <!-- Símbolo "-" -->
+  <text x="104" y="70" font-size="14" font-family="monospace" fill="#1a1a1a">−</text>
+  <!-- Texto identificador -->
+  <text x="58" y="42" font-size="12" font-family="monospace" fill="#333">A.O.</text>
+  <!-- Linhas dos terminais -->
+  <!-- OUT (esquerda) -->
+  <line x1="20" y1="40" x2="10" y2="40" stroke="#111" stroke-width="2"/>
+  <!-- IN+ (direita superior) -->
+  <line x1="100" y1="28" x2="110" y2="28" stroke="#111" stroke-width="2"/>  
+  <!-- IN- (direita inferior) -->
+  <line x1="100" y1="54" x2="110" y2="54" stroke="#111" stroke-width="2"/>
+  <!-- VCC (em cima do triângulo) -->
+  <line x1="60" y1="25" x2="60" y2="5" stroke="#111" stroke-width="2"/>
+  <!-- VEE (embaixo do triângulo) -->
+  <line x1="60" y1="55" x2="60" y2="75" stroke="#111" stroke-width="2"/>
+  <!-- Pino VCC (acima) -->
+  <g id="pin-VCC">
+    <circle cx="60" cy="5" r="3" fill="#ffa000"/>
+    <rect x="57" y="0" width="6" height="10" fill="none"/>
+  </g>
+  <!-- Pino VEE (abaixo) -->
+  <g id="pin-VEE">
+    <circle cx="60" cy="75" r="3" fill="#1976d2"/>
+    <rect x="57" y="70" width="6" height="10" fill="none"/>
+  </g>
+  <!-- Pino OUT (ponta esquerda) -->
+  <g id="pin-OUT">
+    <circle cx="10" cy="40" r="3" fill="#388e3c"/>
+    <rect x="0" y="37" width="10" height="6" fill="none"/>
+  </g>
+  <!-- Pino IN+ (direita superior) -->
+  <g id="pin-INP">
+    <circle cx="110" cy="28" r="3" fill="#d32f2f"/>
+    <rect x="110" y="25" width="10" height="6" fill="none"/>
+  </g>
+  <!-- Pino IN- (direita inferior) -->
+  <g id="pin-INN">
+    <circle cx="110" cy="54" r="3" fill="#050000FF"/>
+    <rect x="110" y="51" width="10" height="6" fill="none"/>
+  </g>
+</svg>

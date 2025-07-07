@@ -1,0 +1,31 @@
+{
+  "name": "opamp",
+  "author": "Prof. Josué Morais - UFU",
+  "description": "Amplificador operacional ideal com ajuste de ganho e tempo de simulação via potenciômetros",
+  "svg": "chip.svg",
+  "pins": [
+    "VCC",
+    "VEE",
+    "OUT",
+    "IN+",
+    "IN-"
+  ],
+  "controls": [
+    {
+      "id": "GAIN",
+      "label": "Gain (x)",
+      "type": "range",
+      "min": 1,
+      "max": 100000,
+      "step": 100
+    },
+    {
+      "id": "SampleTimeMs",
+      "label": "Sample Time (ms)",
+      "type": "range",
+      "min": 1,
+      "max": 100,
+      "step": 1
+    }
+  ]
+}

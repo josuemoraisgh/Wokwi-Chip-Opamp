@@ -36,7 +36,6 @@ jobs:
       - name: Fix permissions and rename output files
         run: |
           sudo chown runner:runner dist/chip.wasm
-          cp dist/chip.wasm "dist/chip.wasm"
           cp chip.json "dist/chip.json"
           cp chip.svg "dist/chip.svg"
 

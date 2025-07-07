@@ -17,11 +17,16 @@ jobs:
         with:
           sources: "src/main.c"
 
-      - name: Copy chip.json
+      - name: Ensure dist folder is clean and writable
         run: |
-          sudo mkdir -p dist
-          sudo cp chip.json dist
-          sudo cp chip.svg dist
+          rm -rf dist
+          mkdir -p dist
+          chmod 777 dist
+
+      - name: Copy chip.json and chip.svg
+        run: |
+          cp chip.json dist/chip.json
+          cp chip.svg dist/chip.svg
 
       - name: 'Upload Artifacts'
         uses: actions/upload-artifact@v4

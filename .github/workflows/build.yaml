@@ -1,60 +1,58 @@
-name: Build OpAmp Chip
+name: Build ADS1115 Chip
 
 on:
   push:
-    tags:
-      - 'v*.*.*'    # Publicação automática em tags semestrais
   workflow_dispatch:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-22.04
-
     steps:
-      - name: Checkout
+      - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Install wasm tool (opcional)
-        run: sudo apt-get update && sudo apt-get install -y wget && wget https://github.com/WebAssembly/wabt/releases/download/wabt-1.0.32/wabt-1.0.32-ubuntu.tar.gz && tar xzf wabt-1.0.32-ubuntu.tar.gz
-
-      - name: Build opamp chip
+      - name: Build chip
         uses: wokwi/wokwi-chip-clang-action@main
         with:
-          sources: wokwi/chips/opamp/src/main.c
-          chip-json: wokwi/chips/opamp/chip.json
+          sources: "ads1115.chip.c"
 
-      - name: Include SVG
+      - name: Copy chip.json
         run: |
-          mkdir -p wokwi/chips/opamp/dist
-          cp wokwi/chips/opamp/chip.svg wokwi/chips/opamp/dist/ || true
+          mkdir -p dist
+          cp ads1115.chip.json dist/chip.json
+          cp ads1115.chip.svg dist/chip.svg
 
-      - name: Finalize artifacts
-        run: |
-          mv dist/chip.wasm wokwi/chips/opamp/dist/opamp.chip.wasm
-          cp wokwi/chips/opamp/chip.json wokwi/chips/opamp/dist/opamp.chip.json
-
-      - name: Upload build artifacts
+      - name: 'Upload Artifacts'
         uses: actions/upload-artifact@v4
         with:
-          name: opamp
+          name: chip
           path: |
-            wokwi/chips/opamp/dist/opamp.chip.wasm
-            wokwi/chips/opamp/dist/opamp.chip.json
-            wokwi/chips/opamp/dist/chip.svg
+            dist/chip.svg
+            dist/chip.json
+            dist/chip.wasm
+          retention-days: 7
 
-      - name: Create GitHub Release (on tag push)
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v1
+  release:
+    name: Release
+    needs: build
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download compiled chip
+        uses: actions/download-artifact@v4
         with:
-          tag_name: ${{ github.ref_name }}
+          name: chip
+          path: chip
+
+      - name: Create a zip archive
+        run: cd chip && zip -9 ../chip.zip chip.*
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ZIP_VERSION: ${{ github.ref_name }}
 
-      - name: Upload to Release
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-upload-release-asset@v1
+      - name: Upload release
+        uses: ncipollo/release-action@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: wokwi/chips/opamp/dist
-          asset_name: opamp-chip-assets.zip
-          asset_content_type: application/zip
+          artifacts: chip.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true

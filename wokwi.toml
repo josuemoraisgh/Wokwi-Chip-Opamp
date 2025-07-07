@@ -2,5 +2,5 @@
 version = 1
 
 [[chip]]
-name = "opamp"
+name = "Opamp"
 binary = "dist/chip.wasm"

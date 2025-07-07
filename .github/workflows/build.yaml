@@ -1,4 +1,4 @@
-name: Build ADS1115 Chip
+name: Build Chip
 
 on:
   push:
@@ -11,42 +11,22 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
-     
-      - name: Clean previous WASM
-        run: rm -f *.wasm
-
-      - name: Debug before build
-        run: |
-          echo "== Before build =="
-          ls -R .
-
       - name: Build chip
         uses: wokwi/wokwi-chip-clang-action@main
         with:
-          sources: src/main.c
-
-      # Corrija as permissões da pasta dist inteira
-      - name: Fix dist folder and files ownership
-        run: sudo chown -R runner:runner dist
-
-      - name: Copy chip.json and chip.svg
-        run: |
-          cp chip.json dist/chip.json
-          cp chip.svg dist/chip.svg
-
-      - name: Check dist content and permissions
-        run: ls -l dist/
-
+          sources: "src/main.c"
+      - name: Copy chip.json
+        run: sudo cp chip.json dist
       - name: 'Upload Artifacts'
         uses: actions/upload-artifact@v4
         with:
           name: chip
           path: |
-            dist/chip.svg
             dist/chip.json
+            dist/chip.svg
             dist/chip.wasm
-          retention-days: 7
 
+  # The release job only runs when you push a tag starting with "v", e.g. v1.0.0 
   release:
     name: Release
     needs: build
@@ -58,12 +38,10 @@ jobs:
         with:
           name: chip
           path: chip
-
       - name: Create a zip archive
         run: cd chip && zip -9 ../chip.zip chip.*
         env:
           ZIP_VERSION: ${{ github.ref_name }}
-
       - name: Upload release
         uses: ncipollo/release-action@v1
         with:

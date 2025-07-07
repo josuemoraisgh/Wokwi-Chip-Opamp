@@ -19,9 +19,9 @@ jobs:
 
       - name: Copy chip.json
         run: |
-          mkdir -p dist
-          cp chip.json dist/chip.json
-          cp chip.svg dist/chip.svg
+          sudo mkdir -p dist
+          sudo cp chip.json dist
+          sudo cp chip.svg dist
 
       - name: 'Upload Artifacts'
         uses: actions/upload-artifact@v4

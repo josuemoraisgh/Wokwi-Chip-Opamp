@@ -25,25 +25,17 @@ jobs:
         with:
           sources: src/main.c
 
-      - name: Debug after build
+      # Corrija as permissões da pasta dist inteira
+      - name: Fix dist folder and files ownership
+        run: sudo chown -R runner:runner dist
+
+      - name: Copy chip.json and chip.svg
         run: |
-          echo "== After build =="
-          ls -R .
-          
+          cp chip.json dist/chip.json
+          cp chip.svg dist/chip.svg
+
       - name: Check dist content and permissions
         run: ls -l dist/
-
-      - name: Fix permissions and rename output files
-        run: |
-          sudo chown runner:runner dist/chip.wasm
-          cp chip.json "dist/chip.json"
-          cp chip.svg "dist/chip.svg"
-
-      - name: Copy chip.json
-        run: |
-          sudo mkdir -p dist
-          sudo cp chip.json dist
-          sudo cp chip.svg dist
 
       - name: 'Upload Artifacts'
         uses: actions/upload-artifact@v4

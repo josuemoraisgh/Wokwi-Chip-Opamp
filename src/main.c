@@ -76,11 +76,5 @@ static void opamp_simulate(void *user_data) {
 
   pin_write(chip->vout, out);
 
-<<<<<<< HEAD
   //printf("[chip-opamp] VINP=%.3fV VINN=%.3fV VOUT=%.3fV (Ganho=%.0fx, Periodo=%dms)\n", vinp, vinn, out, gain, period);
 }
-=======
-  printf("[chip-opamp] VINP=%.3fV VINN=%.3fV VOUT=%.3fV (Ganho=%.0fx, Periodo=%dms)\n",
-         vinp, vinn, out, gain, period);
-}
->>>>>>> a229a647c5c60729d5e6c29f771158552b6988be
